@@ -5,6 +5,7 @@ const mysqlx = require('@mysql/xdevapi');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
+const sanitizer = require('./sanitizer')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -23,10 +24,9 @@ const session = mysqlx.getSession({
 
     // Login Endpoint
     app.post('/login', async (req, res) => {
-        const username = req.body.username;
-        const password = req.body.password;
+        const sanitizedInputs = sanitizer.sanitizeObject(req.body);
 
-        const query = `SELECT username FROM users WHERE username = '${username}' AND password = '${password}'`;
+        const query = `SELECT username FROM users WHERE username = '${sanitizedInputs.username}' AND password = '${sanitizedInputs.password}'`;
 
         console.log(query)
         try {
