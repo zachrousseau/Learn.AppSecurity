@@ -30,17 +30,6 @@ const session = mysqlx.getSession({
 
         console.log(query)
         try {
-            // // Access the 'users' table in the 'client' schema
-            // const table = session.getSchema('client').getTable('users');
-
-            // // Query the table using X Protocol
-            // const results = await table
-            //     .select('username', 'password')
-            //     .where('username = :username AND password = :password')
-            //     .bind('username', username)
-            //     .bind('password', password)
-            //     .execute();
-
 
             const results = await session.sql(query).execute();
 
