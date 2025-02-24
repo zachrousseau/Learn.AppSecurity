@@ -9,3 +9,6 @@ node -v # Should print "v22.14.0".
 
 # Verify npm version:
 npm -v # Should print "10.9.2".
+
+npm install @mysql/xdevapi
+

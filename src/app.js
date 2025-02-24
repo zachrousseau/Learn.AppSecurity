@@ -1,20 +1,24 @@
+// Modules
 const express = require('express');
 const mysql = require('mysql');
+const mysqlx = require('@mysql/xdevapi');
 const bodyParser = require('body-parser');
 const path = require('path');
-
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-const connection = mysql.createConnection({
+const session = mysqlx.getSession({
     host: 'localhost',
-    user: 'user',
-    password: 'password',
-    database: 'database'
+    user: 'root',
+    password: 'root',
+    schema: 'client', // Use your database name as the schema
+    port: 33060       // X Protocol port
 });
+
 
 app.post('/login', (req, res) => {
     const username = req.body.username;
