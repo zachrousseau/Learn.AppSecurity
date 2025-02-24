@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const session = mysqlx.getSession({
-    host: 'localhost',
+    host: 'host.docker.internal',
     user: 'root',
     password: 'root',
     schema: 'client', // Use your database name as the schema
