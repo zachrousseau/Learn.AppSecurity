@@ -10,6 +10,8 @@ services:
     command: ["node", "app.js"]  # Ensure the Node.js app starts from app.js in src
     expose:
       - "3000"
+    networks:
+      - backend
 
   nginx:
     image: nginx:latest
