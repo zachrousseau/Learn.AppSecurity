@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   nodejs:
     image: node:14
@@ -14,7 +12,9 @@ services:
       - backend
 
   nginx:
-    image: nginx:latest
+    build:
+      context: ./nginx  # Docker build context for Nginx with ModSecurity
+      dockerfile: Dockerfile  # Dockerfile for building Nginx with ModSecurity
     container_name: nginx-proxy
     ports:
       - "80:80"
