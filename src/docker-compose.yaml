@@ -22,20 +22,20 @@ services:
       - nodejs
     networks:
       - backend
+  
+  mysql: 
+    image: mysql:9.2.0
+    environment: 
+      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_DATBASE: users
+    ports: 
+      - '3600:3600'
+    volumes: 
+      - db_data:/var/lib/mysql
+      - ./database/initdb/user.init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  # nginx:
-  #   build:
-  #     context: ./nginx  # Docker build context for Nginx with ModSecurity
-  #     dockerfile: Dockerfile  # Dockerfile for building Nginx with ModSecurity
-  #   container_name: nginx-proxy
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro  # Mount the custom Nginx config
-  #   depends_on:
-  #     - nodejs
-  #   networks:
-  #     - backend
+volumes:
+  db_data:
 
 networks:
   backend:
